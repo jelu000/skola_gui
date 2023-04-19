@@ -9,16 +9,16 @@ class ElevHanterare:
         self.elevlist = []
         self.filnamn = "elever.pkl"
         
-        #try:
-         #   self.read_from_file()
-        #except ValueError:
-         #   print("Kunde inte läsa från fil")
+        
+        self.read_from_file()
+    
 
     #add_elev()--------------------------------------------------------------------------
     def add_elev(self, elevnamn, utbildning, tel):
         t_elev = elev.Elev(elevnamn, utbildning, tel)
         self.elevlist.append(t_elev)
 
+        self.save_to_file()
         #sorterar
         self.elevlist= sorted(self.elevlist, key=lambda p: p.namn)
 
@@ -35,6 +35,8 @@ class ElevHanterare:
         try:
             #self.elevlist = [p for p in self.elevlist if p.tel != tel]
             self.elevlist.pop(int(index))
+
+            self.save_to_file()
             status = "\nEleven togs bort!"
         
         except ValueError:
@@ -67,14 +69,15 @@ class ElevHanterare:
         
         #Om filen saknas
         if not os.path.exists(self.filnamn):
-            with open(self.filnamn, "w") as f:
+            with open(self.filnamn, "w") as f: #OBS: ändrade w->wb FRÅN : open(self.filnamn, "w")
                 f.write("")
+                #pickle.dump(elev.Elev("", "", ""), f)
                 #print(f"{filename} created.")
         
         else:
             # open the file for reading
             with open(self.filnamn, "rb") as f:
-                # use pickle to load the list of objects from the file
+            # use pickle to load the list of objects from the file
                 elever = pickle.load(f)
                 self.elevlist = elever
 
@@ -84,6 +87,6 @@ class ElevHanterare:
     def spara_avsluta(self):
         self.save_to_file()
 
-        
+   
 
     

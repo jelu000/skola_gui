@@ -3,8 +3,9 @@ import elevhanterare
 
 # https://www.geeksforgeeks.org/python-grid-method-in-tkinter/
 
- 
+
 skola = elevhanterare.ElevHanterare()
+
 
 # create a root window.
 root = Tk()
@@ -87,6 +88,8 @@ def update_listBox(t_elevlista):
         
         i+=1
 
+
+update_listBox(skola.get_elevlist())
 # pack the widgets
 #label.pack()
 #listbox.pack()
